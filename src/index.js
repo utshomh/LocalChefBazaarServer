@@ -1,6 +1,7 @@
 import app from "./app.js";
 import logger from "./utils/logger.js";
 import { port } from "./config/env.js";
+import "./config/db.js";
 
 const serverLogger = logger.child({ module: "server" });
 

@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 
 import globalErrorHandler from "./middlewares/errors.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -9,13 +10,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/great/:name", (req, res) => {
-  const { name } = req.params;
-  if (name.length < 3) {
-    return res.status(400).json({ message: `Invalid name ${name}` });
-  }
-  res.json({ message: `Hello, ${name}` });
-});
+// Routes
+app.use("/api/users", userRoutes);
 
 app.all(/.*/, (req, res) => {
   return res
