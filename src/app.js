@@ -3,6 +3,7 @@ import express from "express";
 
 import globalErrorHandler from "./middlewares/errors.js";
 import userRoutes from "./routes/userRoutes.js";
+import mealRoutes from "./routes/mealRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
 
 const app = express();
@@ -17,6 +18,7 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/meals", mealRoutes);
 app.use("/api/requests", requestRoutes);
 
 app.all(/.*/, (req, res) => {
