@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const query = req.query;
-    const requests = await Request.find(query);
+    const requests = await Request.find(query).populate("user");
     res.json(requests);
   } catch (err) {
     console.error(err);
