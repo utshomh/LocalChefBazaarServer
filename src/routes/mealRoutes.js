@@ -8,8 +8,10 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const query = req.query;
-    const meals = await Meal.find(query).populate("chef");
+    const { limit, ...filters } = req.query;
+    const meals = await Meal.find(filters)
+      .limit(Number(limit) || 0)
+      .populate("chef");
     const mealsWithRatings = await Promise.all(
       meals.map(async (meal) => {
         const { avgRating, totalReviews } = await getMealRating(meal._id);
